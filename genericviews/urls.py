@@ -14,17 +14,35 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path
+from django.urls import path,include
 from Books import views
+from rest_framework.routers import DefaultRouter
+
+router=DefaultRouter()
+router.register('api',views.Studentviewset,basename='student')
+
 urlpatterns = [
-    path('admin/', admin.site.urls),
-    path('api/',views.StudentList.as_view()),
-    path('add/',views.StudentCreate.as_view()),
-    path('retrieve/<int:pk>/',views.StudentRetrieve.as_view()),
-    path('update/<int:pk>/',views.StudentUpdate.as_view()),
-    path('destroy/<int:pk>/',views.StudentDestroy.as_view()),
-    path('listcreate',views.Studentlistcreate.as_view()),
-    path('retriveupdate/<int:pk>/',views.Studentretriveupdate.as_view()),
-    path('retrivedesrtoy/<int:pk>/',views.Studentretrivedestroy.as_view()),
-    path('retriveupdatedesrtoy/<int:pk>/',views.Studentretriveupdatedestroy.as_view()),
+    path('admin/',admin.site.urls),
+    path('',include(router.urls)),
+
+
 ]
+
+
+
+
+
+
+
+# urlpatterns = [
+#     path('admin/', admin.site.urls),
+#     path('api/',views.StudentList.as_view()),
+#     path('add/',views.StudentCreate.as_view()),
+#     path('retrieve/<int:pk>/',views.StudentRetrieve.as_view()),
+#     path('update/<int:pk>/',views.StudentUpdate.as_view()),
+#     path('destroy/<int:pk>/',views.StudentDestroy.as_view()),
+#     path('listcreate',views.Studentlistcreate.as_view()),
+#     path('retriveupdate/<int:pk>/',views.Studentretriveupdate.as_view()),
+#     path('retrivedesrtoy/<int:pk>/',views.Studentretrivedestroy.as_view()),
+#     path('retriveupdatedesrtoy/<int:pk>/',views.Studentretriveupdatedestroy.as_view()),
+# ]
